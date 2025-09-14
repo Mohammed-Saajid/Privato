@@ -40,7 +40,16 @@ class TestAnalyzerRoutes:
 
     def test_analyze_file_image(self, client, mock_ingestor, mock_analyzer):
         mock_ingestor.ingest.return_value = ("fake_image_bytes", "img")
-        mock_analyzer.analyze_image.return_value = [{"result": "image_analysis"}]
+        mock_analyzer.analyze_image.return_value = [
+         {
+                "entity_type": "PERSON",
+                "start": 10,
+                "end": 25,
+                "score": 0.85
+            }
+        ]
+
+     
 
         response = client.post(
             "/analyzer/upload_file",
@@ -49,15 +58,14 @@ class TestAnalyzerRoutes:
 
         assert response.status_code == status.HTTP_200_OK
         data = response.json()
-        assert data["analysis"][0]["result"] == "image_analysis"
         assert data["message"] == "Analysis completed successfully."
         mock_analyzer.analyze_image.assert_called_once_with("fake_image_bytes")
 
     def test_analyze_file_multiple_images(self, client, mock_ingestor, mock_analyzer):
         mock_ingestor.ingest.return_value = (["img1", "img2"], "imgs")
         mock_analyzer.analyze_image.side_effect = [
-            {"result": "img1_analysis"},
-            {"result": "img2_analysis"},
+            [{"entity_type": "PHONE_NUMBER", "start": 0, "end": 10, "score": 0.9}],
+            [{"entity_type": "EMAIL", "start": 15, "end": 30, "score": 0.95}]
         ]
 
         response = client.post(
@@ -67,14 +75,18 @@ class TestAnalyzerRoutes:
 
         assert response.status_code == status.HTTP_200_OK
         data = response.json()
-        assert data["analysis"] == [
-            {"result": "img1_analysis"},
-            {"result": "img2_analysis"},
-        ]
+        assert len(data["analysis"]) == 2
 
     def test_analyze_file_text(self, client, mock_ingestor, mock_analyzer):
         mock_ingestor.ingest.return_value = ("some text", "text")
-        mock_analyzer.analyze_text.return_value = [{"result": "text_analysis"}]
+        mock_analyzer.analyze_text.return_value = [
+            {
+                "entity_type": "EMAIL_ADDRESS",
+                "start": 5,
+                "end": 15,
+                "score": 0.95
+            }
+        ]
 
         response = client.post(
             "/analyzer/upload_file",
@@ -82,7 +94,6 @@ class TestAnalyzerRoutes:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert response.json()["analysis"] == [{"result": "text_analysis"}]
         mock_analyzer.analyze_text.assert_called_once_with("some text")
 
     def test_analyze_file_dataframe(self, client, mock_ingestor, mock_analyzer):

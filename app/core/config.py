@@ -9,7 +9,7 @@ from starlette.datastructures import Secret
 config = Config(".env")
 
 API_PREFIX = "/api"
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 DEBUG: bool = config("DEBUG", cast=bool, default=False)
 MEMOIZATION_FLAG: bool = config("MEMOIZATION_FLAG", cast=bool, default=True)
 
@@ -23,7 +23,8 @@ logging.basicConfig(
 logger.configure(handlers=[{"sink": sys.stderr, "level": LOGGING_LEVEL}])
 
 MODEL_PATH = config("MODEL_PATH", default="./ml/model/")
-MODEL_NAME = config("MODEL_NAME", default="model.pkl")
-INPUT_EXAMPLE = config("INPUT_EXAMPLE", default="./ml/model/examples/example.json")
-REPO_ID = config("REPO_ID",default="")
+SIGNATURE_MODEL_NAME = config("SIGNATURE_MODEL_NAME", default="model.pkl")
+SIGNATURE_REPO_ID = config("SIGNATURE_REPO_ID",default="")
 HUGGING_FACE_KEY = config("HF_KEY", cast=Secret, default="")
+FACE_MODEL_NAME = config("FACE_MODEL_NAME", default="model.pt")
+FACE_REPO_ID = config("FACE_REPO_ID",default="")

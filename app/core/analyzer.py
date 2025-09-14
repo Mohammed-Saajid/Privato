@@ -1,14 +1,17 @@
 """Analyzer module for text and image analysis."""
 from presidio_analyzer import AnalyzerEngine
-from presidio_image_redactor import ImageAnalyzerEngine
+from app.core.image_analyzer_engine import CustomImageAnalyzerEngine as ImageAnalyzerEngine
 from PIL import Image
 from typing import List,Dict
 
 class Analyzer:
     """Analyzer class for text and image analysis."""
-    def __init__(self):
-        """Initialize the Analyzer class."""
-        self.text_analyzer = AnalyzerEngine()
+    def __init__(self,log_decision_process: bool = False):
+        """Initialize the Analyzer class.
+        Args:
+            log_decision_process (bool, optional): Whether to log the decision process. Defaults to False.
+        """
+        self.text_analyzer = AnalyzerEngine(log_decision_process=log_decision_process)
         self.image_analyzer = ImageAnalyzerEngine()
 
     def analyze_text(self, text: str, language: str = "en", entities: list = None) -> List[Dict]:

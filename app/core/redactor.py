@@ -1,5 +1,6 @@
 """Module for redacting sensitive information from text and images."""
 from presidio_image_redactor import ImageRedactorEngine
+from app.core.image_analyzer_engine import CustomImageAnalyzerEngine as ImageAnalyzerEngine
 from presidio_anonymizer import AnonymizerEngine
 from PIL import Image
 from presidio_analyzer import AnalyzerEngine
@@ -17,10 +18,10 @@ class Redactor():
         analyzer_engine (AnalyzerEngine): Instance of the text analyzer engine.
         text_anonymyzer (AnonymizerEngine): Instance of the text anonymizer engine.
     """
-    def __init__(self):
+    def __init__(self, log_decision_process: bool = False):
         """Initialize the Redactor class."""
-        self.image_redactor = ImageRedactorEngine()
-        self.analyzer_engine = AnalyzerEngine()
+        self.image_redactor = ImageRedactorEngine(image_analyzer_engine=ImageAnalyzerEngine())
+        self.analyzer_engine = AnalyzerEngine(log_decision_process=log_decision_process)
         self.text_anonymyzer = AnonymizerEngine()
 
     def redact_image(self, img: Image.Image) -> Image.Image:

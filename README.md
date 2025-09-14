@@ -15,7 +15,6 @@ To Identify and Redact Personal Identifiable information
 
 ```sh
 MODEL_PATH=./ml/model/
-MODEL_NAME=yolov8s.onnx
 ```
 
 
