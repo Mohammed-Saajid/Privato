@@ -23,7 +23,7 @@ logging.basicConfig(
 logger.configure(handlers=[{"sink": sys.stderr, "level": LOGGING_LEVEL}])
 
 MODEL_PATH = config("MODEL_PATH", default="./ml/model/")
-SIGNATURE_MODEL_NAME = config("SIGNATURE_MODEL_NAME", default="model.pkl")
+SIGNATURE_MODEL_NAME = config("SIGNATURE_MODEL_NAME", default="yolov8s.onnx")
 SIGNATURE_REPO_ID = config("SIGNATURE_REPO_ID",default="")
 HUGGING_FACE_KEY = config("HF_KEY", cast=Secret, default="")
 FACE_MODEL_NAME = config("FACE_MODEL_NAME", default="model.pt")
