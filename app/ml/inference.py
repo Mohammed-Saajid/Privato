@@ -3,10 +3,11 @@
 import os 
 from ultralytics import YOLO
 from PIL import Image
-from app.core.config import MODEL_PATH, SIGNATURE_MODEL_NAME, FACE_MODEL_NAME
+from app.core.config import MODEL_PATH, SIGNATURE_MODEL_NAME, FACE_MODEL_NAME, SIGNATURE_REPO_ID, FACE_REPO_ID
 from presidio_image_redactor.entities import ImageRecognizerResult
 from typing import List, Dict, Any
 import json
+from ml.pull_models import download_model
 
 class ImageInference:
     """Class to handle image inference using a pre-trained YOLO models."""
@@ -18,6 +19,9 @@ class ImageInference:
         """
         self.signature_model_name = SIGNATURE_MODEL_NAME
         self.face_model_name = FACE_MODEL_NAME
+        # Download models if they are not present
+        download_model(model_filename=self.signature_model_name, model_path=model_path, repo_id=SIGNATURE_REPO_ID)
+        download_model(model_filename=self.face_model_name, model_path=model_path, repo_id=FACE_REPO_ID)
         self.signature_model_path = os.path.join(model_path, self.signature_model_name)
         self.signature_model = YOLO(self.signature_model_path, task="detect")
         self.face_model_path = os.path.join(model_path, self.face_model_name)
