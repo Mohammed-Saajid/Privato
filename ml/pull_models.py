@@ -7,7 +7,7 @@ if HUGGING_FACE_KEY:
     login(token=str(HUGGING_FACE_KEY))
 else:
     print("Hugging Face key not found. Please set the HF_KEY environment variable.")
-    exit()
+    raise ValueError("Hugging Face key not found.")
 
 def download_model(repo_id: str, model_filename: str, model_path: str):
     """Download the model from Hugging Face Hub if not already present.
