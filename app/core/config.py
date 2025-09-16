@@ -5,7 +5,6 @@ from app.core.logging import InterceptHandler
 from loguru import logger
 from starlette.config import Config
 from starlette.datastructures import Secret
-
 config = Config(".env")
 
 API_PREFIX = "/api"
@@ -28,3 +27,5 @@ SIGNATURE_REPO_ID = config("SIGNATURE_REPO_ID",default="")
 HUGGING_FACE_KEY = config("HF_KEY", cast=Secret, default="")
 FACE_MODEL_NAME = config("FACE_MODEL_NAME", default="model.pt")
 FACE_REPO_ID = config("FACE_REPO_ID",default="")
+LANGUAGE_CONFIG = config("LANGUAGE_CONFIG", default="docs/languages-config.yml")
+SUPPORTED_LANGUAGES = config("SUPPORTED_LANGUAGES", default="en,es,de").split(",")

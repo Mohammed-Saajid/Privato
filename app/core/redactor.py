@@ -3,7 +3,7 @@ from presidio_image_redactor import ImageRedactorEngine
 from app.core.image_analyzer_engine import CustomImageAnalyzerEngine as ImageAnalyzerEngine
 from presidio_anonymizer import AnonymizerEngine
 from PIL import Image
-from presidio_analyzer import AnalyzerEngine
+from app.core.analyzer_engine import CustomAnalyzerEngine as AnalyzerEngine
 from typing import Dict, List
 import json
 from pathlib import Path
@@ -18,39 +18,41 @@ class Redactor():
         analyzer_engine (AnalyzerEngine): Instance of the text analyzer engine.
         text_anonymyzer (AnonymizerEngine): Instance of the text anonymizer engine.
     """
-    def __init__(self, log_decision_process: bool = False):
+    def __init__(self):
         """Initialize the Redactor class."""
         self.image_redactor = ImageRedactorEngine(image_analyzer_engine=ImageAnalyzerEngine())
-        self.analyzer_engine = AnalyzerEngine(log_decision_process=log_decision_process)
+        self.analyzer_engine = AnalyzerEngine()
         self.text_anonymyzer = AnonymizerEngine()
 
-    def redact_image(self, img: Image.Image) -> Image.Image:
+    def redact_image(self, img: Image.Image, language: str = "en") -> Image.Image:
         """Redact sensitive information from an image.
         Args:
             img (Image): The image to redact.
+            language (str, optional): The language of the image content. Defaults to "en".
         Returns:
             Image: The redacted image.
         """
-        redacted_image = self.image_redactor.redact(image=img)
+        redacted_image = self.image_redactor.redact(image=img,language=language)
         return redacted_image
     
-    def redact_text(self, text: str) -> Dict:
+    def redact_text(self, text: str, language: str = "en") -> Dict:
         """Redact sensitive information from text.
         Args:
             text (str): The text to redact.
+            language (str, optional): The language of the text. Defaults to "en".
         Returns:
             Dict: The redacted text in JSON format.
         """
-        analyzed_text = self.analyzer_engine.analyze(text=text, language="en")
+        analyzed_text = self.analyzer_engine.analyze(text=text, language=language)
         anonymized_text = self.text_anonymyzer.anonymize(text=text, analyzer_results=analyzed_text)
         return json.loads(anonymized_text.to_json())
-    
-    def redact_pdf(self, images : List[Image.Image]) -> bytes:
+
+    def redact_pdf(self, images : List[Image.Image], language: str = "en") -> bytes:
         with tempfile.TemporaryDirectory() as temp_dir:
                temp_dir_path = Path(temp_dir)
                redacted_img_paths = []
                for i, img in enumerate(images, start=1):
-                   redacted_img = self.image_redactor.redact(img)
+                   redacted_img = self.image_redactor.redact(img, language=language)
                    temp_img_path = temp_dir_path / f"redacted_page_{i}.png"
                    redacted_img.save(temp_img_path)
                    redacted_img_paths.append(temp_img_path)

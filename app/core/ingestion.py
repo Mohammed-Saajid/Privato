@@ -3,7 +3,6 @@ from typing import List, Union, Dict, Tuple
 from PIL import Image
 from pandas import DataFrame
 from fastapi import UploadFile, File
-from .utils import save_upload_file 
 from .converter import PDFToImageConverter
 from .file_reader import FileReader
 
@@ -53,8 +52,8 @@ class Ingestor:
         elif ext == '.txt':
             return self.file_reader.read_text(file_bytes),"text"
         elif ext == '.xlsx':
-            return [self.file_reader.read_xlsx(file_bytes)],"df"
+            return self.file_reader.read_xlsx(file_bytes),"df"
         elif ext == '.csv':
-            return [self.file_reader.read_csv(file_bytes)],"df"
+            return self.file_reader.read_csv(file_bytes),"df"
         elif ext == '.json':
-            return [self.file_reader.read_json(file_bytes)],"json"
+            return self.file_reader.read_json(file_bytes),"json"

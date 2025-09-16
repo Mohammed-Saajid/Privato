@@ -1,3 +1,4 @@
+"""Core Utilities."""
 from pathlib import Path
 from PIL import Image
 from typing import List
@@ -8,7 +9,7 @@ from fastapi import UploadFile
 from contextlib import contextmanager
 from pathlib import Path
 import tempfile
-from typing import Union, Optional
+from typing import Union, Optional,Any, Dict, List
 from typing import Generator
 import os
 def load_image(image_path: str) -> Image.Image:
@@ -141,3 +142,38 @@ def images_to_pdf(image_paths: List[Path], output_pdf_path: Path) -> Optional[Pa
         
         # Note: The images opened in the generator are automatically handled
         # and closed as they are consumed by the .save() method.
+    
+
+def check_json_complexity(data: Dict[str, Any]) -> None:
+    """
+    Recursively checks a dictionary to see if it contains a list of dictionaries.
+
+    This is used to identify complex JSON structures that are not supported
+    by the `JsonAnalysisBuilder` and require manual analysis definition.
+
+    Args:
+        data: The dictionary (JSON object) to check.
+
+    Raises:
+        NotImplementedError: If a list containing a dictionary is found.
+    """
+    for value in data.values():
+        if isinstance(value, dict):
+            # If the value is another dictionary, recurse into it
+            check_json_complexity(value)
+        elif isinstance(value, list):
+            # If the value is a list, check its items
+            _check_list_items(value)
+
+def _check_list_items(items: List[Any]) -> None:
+    """Helper function to check items within a list."""
+    for item in items:
+        if isinstance(item, dict):
+            # This is the "complex" case: a dictionary inside a list
+            raise NotImplementedError(
+                "Handling JSON with nested objects (dictionaries) in lists is not supported. "
+                "Please define the analysis manually using StructuredAnalysis."
+            )
+        elif isinstance(item, list):
+            # Recurse in case of nested lists (e.g., list of lists)
+            _check_list_items(item)

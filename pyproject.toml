@@ -27,8 +27,9 @@ dependencies = [
     "supervision>=0.26.1",
     "huggingface-hub>=0.34.4",
     "onnxruntime>=1.18.0",
-    "onnx>=1.17.0"
-    
+    "onnx>=1.17.0",
+    "presidio-structured>=0.0.6",
+
 
     
 ]
