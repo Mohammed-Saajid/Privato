@@ -16,9 +16,14 @@ class AnalysisResult(BaseModel):
     width: Optional[int] = None
     height: Optional[int] = None
 
+class StructuredAnalysisResult(BaseModel):
+    entity_mapping: dict
+    
+
+
 
 class AnalyzerResponse(BaseModel):
-    analysis: Optional[Union[List[AnalysisResult], List[List[AnalysisResult]]]] 
+    analysis: Optional[Union[List[AnalysisResult], List[List[AnalysisResult]], StructuredAnalysisResult]] 
     message: Optional[str] = None
     error: Optional[str] = None
     
