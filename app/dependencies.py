@@ -1,8 +1,8 @@
 """Dependency injection functions for the app."""
 
-from app.core.ingestion import Ingestor
-from app.core.analyzer import Analyzer
-from app.core.redactor import Redactor
+from core.ingestion import Ingestor
+from core.analyzer import Analyzer
+from core.redactor import Redactor
 
 # These objects are created once and shared across all requests.
 ingestor = Ingestor()
