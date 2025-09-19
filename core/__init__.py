@@ -1,0 +1,1 @@
+"""Core functionalities for the app."""
