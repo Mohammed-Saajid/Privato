@@ -83,3 +83,9 @@ addopts = "-v -rA"
 testpaths = [
     "tests",
 ]
+
+# Set up CLI Commands
+[project.scripts]
+privato = "cli.main:app"
+
+
