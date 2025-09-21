@@ -30,7 +30,7 @@ jobs:
 
       - name: Build documentation
         run: |
-          mkdocs build
+          python -m mkdocs build
 
       - name: Deploy documentation
         run: |
