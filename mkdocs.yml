@@ -1,0 +1,43 @@
+# mkdocs.yml
+
+site_name: "Privato Documentation"
+repo_url: "https://github.com/Mohammed-Saajid/privato" 
+
+theme:
+  name: material
+  palette:
+    # Light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+# Navigation structure
+nav:
+  - 'Home': 'index.md'
+  - 'Getting Started': 'getting_started.md'
+  - 'API Reference': 'api.md'
+  - 'CLI Commands': 'cli.md'
+  - 'Models': 'models.md'
+  - 'Contributing': 'contributing.md'
+  
+
+# Extensions and plugins
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_root_heading: true
+            show_source: false
