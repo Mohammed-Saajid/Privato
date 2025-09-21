@@ -8,7 +8,7 @@ from starlette.datastructures import Secret
 config = Config(".env")
 
 API_PREFIX = "/api"
-VERSION = "0.1.1"
+VERSION = "0.1.2"
 DEBUG: bool = config("DEBUG", cast=bool, default=False)
 MEMOIZATION_FLAG: bool = config("MEMOIZATION_FLAG", cast=bool, default=True)
 
@@ -29,3 +29,6 @@ FACE_MODEL_NAME = config("FACE_MODEL_NAME", default="model.pt")
 FACE_REPO_ID = config("FACE_REPO_ID",default="")
 LANGUAGE_CONFIG = config("LANGUAGE_CONFIG", default="docs/languages-config.yml")
 SUPPORTED_LANGUAGES = config("SUPPORTED_LANGUAGES", default="en,es,de").split(",")
+
+logging.getLogger("presidio-analyzer").setLevel(logging.ERROR)
+logging.getLogger("presidio-analyzer").propagate = False
