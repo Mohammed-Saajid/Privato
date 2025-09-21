@@ -29,7 +29,7 @@ RUN pip install uv
 # Copy only the dependency file first to leverage Docker layer caching
 COPY pyproject.toml ./
 
-COPY .env ./
+
 
 # Install production dependencies directly into the system Python
 RUN uv pip install --system .
@@ -75,8 +75,8 @@ RUN chown -R appuser:appuser /usr/local/bin
 
 
 # Copy the application and ML model files
-COPY --chown=appuser:appuser app ./app
-COPY --chown=appuser:appuser ml ./ml
+COPY --chown=appuser:appuser privato/app ./privato/app
+COPY --chown=appuser:appuser privato/ml ./privato/ml
 
 # Switch to the non-root user
 USER appuser

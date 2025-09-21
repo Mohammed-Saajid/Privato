@@ -40,7 +40,8 @@ dev = [
     "autopep8>=2.0.0",
     "ipdb>=0.13.0",
     "pylint>=3.0.0",
-    "reportlab>=4.4.3"
+    "reportlab>=4.4.3",
+    "mkdocs>=1.6.1"
 ]
 aws = [
     "mangum>=0.17.0"

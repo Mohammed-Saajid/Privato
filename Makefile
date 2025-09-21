@@ -74,9 +74,3 @@ down: ## Stop and remove Docker containers
 	docker-compose down
 	@echo "Containers stopped."
 
-# This is a hidden target used by others, not meant to be called directly
-.env:
-	@if [ ! -f .env ]; then \
-		echo "--> Creating .env file from .env.example..."; \
-		cp .env.example .env; \
-	fi

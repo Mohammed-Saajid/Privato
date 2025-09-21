@@ -1,47 +1,55 @@
 # Privato
 
-To Identify and Redact Personal Identifiable information
+Privato is a SDK for building secure and privacy-focused applications. It provides tools and libraries to help developers create applications that analyze and redact personal identifiable information (PII).
 
-## Development Requirements
+Privato provides both an API and a web interface for easy interaction.
 
-- Python 3.11+
-- Uv (Python Package Manager)
-- Make
-- Docker
-- Docker Compose
-- ONNX Runtime
+## Features
 
-### M.L Model Environment
-
-```sh
-MODEL_PATH=./ml/model/
-```
-
-
+- PII Detection: Identify and classify various types of PII in text data.
+- Redaction: Automatically redact sensitive information to protect user privacy.
+- Customizable: Extend and customize the detection and redaction capabilities to fit specific needs.
+- Easy Integration: Simple API for seamless integration into existing applications.
+- Web Interface: User-friendly web interface for manual review and redaction.
 
 ## Installation
+You can install Privato using pip:
 
-```sh
-make install
+```bash
+pip install privato
 ```
 
-## Running Localhost
+## Usage
+Here's a simple example of how to use Privato to detect and redact PII in text:
 
-`make run`
+```py
+from privato.core.redactor import Redactor
 
-## Deploy app
+text = "John's email is john.doe@example.com and his phone number is (123) 456-7890."
+redactor = Redactor()
+redacted_text = redactor.redact_text(text)['text']
+print(redacted_text)
+```
+This will output:
+```
+"<PERSON>'s email is <EMAIL_ADDRESS> and his phone number is <PHONE_NUMBER>."
+```
 
-`make deploy`
+## Web Interface
+To run the web interface, use the following command:
 
-## Running Tests
+```bash
+uvicorn privato.app.main:app --reload
+```
 
-`make test`
+To start the frontend, navigate to the `privato/static` directory and run:
 
-## Access Swagger Documentation
+```bash
+npm install
+npm run dev
+```
 
-> <http://localhost:8080/docs>
+Then, open your browser and go to `http://localhost:5173`.
 
-## Access Redocs Documentation
-
-> <http://localhost:8080/redoc>
-
+## Docs
+For more detailed documentation, visit the [Privato Documentation](https://github.com/Mohammed-Saajid/privato).
