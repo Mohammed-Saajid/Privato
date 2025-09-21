@@ -2,7 +2,7 @@ import pytest
 from fastapi import APIRouter
 from unittest.mock import patch
 
-import app.api.routes.api as api_module
+import privato.app.api.routes.api as api_module
 
 
 class TestApiRoutes:
