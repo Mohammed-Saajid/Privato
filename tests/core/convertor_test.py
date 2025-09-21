@@ -5,7 +5,7 @@ from pathlib import Path
 from PIL import Image
 from reportlab.pdfgen import canvas
 
-from app.core.converter import PDFToImageConverter
+from privato.app.core.converter import PDFToImageConverter
 
 
 @pytest.fixture

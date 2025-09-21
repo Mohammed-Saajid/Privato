@@ -6,7 +6,7 @@ from pathlib import Path
 from pandas import DataFrame
 from PIL import Image
 
-from app.core.file_reader import FileReader
+from privato.app.core.file_reader import FileReader
 
 
 @pytest.fixture

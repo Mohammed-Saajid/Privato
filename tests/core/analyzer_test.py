@@ -3,7 +3,7 @@ from unittest.mock import MagicMock, patch
 from PIL import Image
 import io
 
-from app.core.analyzer import Analyzer
+from privato.app.core.analyzer import Analyzer
 
 
 @pytest.fixture

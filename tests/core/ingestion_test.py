@@ -6,7 +6,7 @@ from PIL import Image
 import pandas as pd
 import json
 
-from app.core.ingestion import Ingestor
+from privato.app.core.ingestion import Ingestor
 
 
 def make_upload_file(filename: str, content: bytes, content_type: str = "application/octet-stream"):

@@ -5,8 +5,8 @@ from fastapi import status
 from unittest.mock import MagicMock
 from PIL import Image
 
-from app.api.routes.redactor import router
-from app.main import app  # Assuming FastAPI instance is in app/main.py
+from privato.app.api.routes.redactor import router
+from privato.app.main import app  # Assuming FastAPI instance is in app/main.py
 
 
 # Attach router for tests if not already included in app
@@ -31,7 +31,7 @@ def mock_redactor():
 @pytest.fixture(autouse=True)
 def override_dependencies(mock_ingestor, mock_redactor):
     app.dependency_overrides = {}
-    from app.dependencies import get_ingestor, get_redactor
+    from privato.app.dependencies import get_ingestor, get_redactor
     app.dependency_overrides[get_ingestor] = lambda: mock_ingestor
     app.dependency_overrides[get_redactor] = lambda: mock_redactor
     yield

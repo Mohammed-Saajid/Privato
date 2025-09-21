@@ -4,8 +4,8 @@ from fastapi.testclient import TestClient
 from fastapi import status
 from unittest.mock import MagicMock
 
-from app.main import app  # FastAPI app is initialized in app/main.py
-from app.api.routes.analyzer import router
+from privato.app.main import app  # FastAPI app is initialized in app/main.py
+from privato.app.api.routes.analyzer import router
 
 # Include router in app for testing if not already included
 app.include_router(router)
@@ -29,7 +29,7 @@ def mock_analyzer():
 @pytest.fixture(autouse=True)
 def override_dependencies(mock_ingestor, mock_analyzer):
     app.dependency_overrides = {}
-    from app.dependencies import get_ingestor, get_analyzer
+    from privato.app.dependencies import get_ingestor, get_analyzer
     app.dependency_overrides[get_ingestor] = lambda: mock_ingestor
     app.dependency_overrides[get_analyzer] = lambda: mock_analyzer
     yield
