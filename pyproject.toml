@@ -1,7 +1,7 @@
 [project]
 requires-python = ">=3.9"
 name = "privato"
-version = "0.1.0"
+version = "0.1.2"
 description = "To Identify and Redact Personal Identifiable information"
 authors = [
     { name = "Mohammed Saajid", email = "mohammedsaajid23@gmail.com" },
@@ -84,8 +84,16 @@ testpaths = [
     "tests",
 ]
 
+[tool.setuptools.package-data]
+"privato.ml.model" = ["*.onnx", "*.pt"]
+
+[tool.setuptools]
+include-package-data = true
+
+
+
 # Set up CLI Commands
 [project.scripts]
-privato = "cli.main:app"
+privato = "privato.cli.main:app"
 
 
