@@ -43,6 +43,7 @@ dev = [
     "reportlab>=4.4.3",
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.6.20",
+    "mkdocstrings>=0.30.1",
 ]
 aws = [
     "mangum>=0.17.0"
