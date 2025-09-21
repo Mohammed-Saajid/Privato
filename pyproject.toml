@@ -29,9 +29,8 @@ dependencies = [
     "onnxruntime>=1.18.0",
     "onnx>=1.17.0",
     "presidio-structured>=0.0.6",
-
-
-    
+    "typer>=0.9.4",
+   
 ]
 
 [project.optional-dependencies]
