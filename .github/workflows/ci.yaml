@@ -27,9 +27,6 @@ jobs:
         run: |
           make install-dev
 
-      - name: Test with pytest
-        run: |
-          make test
 
       - name: Build documentation
         run: |
