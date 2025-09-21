@@ -2,7 +2,7 @@
 
 Privato is a SDK for building secure and privacy-focused applications. It provides tools and libraries to help developers create applications that analyze and redact personal identifiable information (PII).
 
-Privato provides both an API and a web interface for easy interaction.
+Privato provides both an API, CLI and a web interface for easy interaction.
 
 ## Features
 
