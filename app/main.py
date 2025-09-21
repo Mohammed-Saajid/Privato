@@ -2,6 +2,9 @@
 from fastapi import FastAPI
 from app.api.routes.api import router as api_router
 from fastapi.middleware.cors import CORSMiddleware
+import logging
+logging.getLogger("presidio-analyzer").setLevel(logging.ERROR)
+
 origins = [
     "http://localhost",
     "http://localhost:5173",

@@ -36,7 +36,7 @@ def redact_file(
         raise HTTPException(status_code=400, detail=f"Language '{language}' is not supported. Supported languages are: {list(SUPPORTED_LANGUAGES)}")
     try:
         ingested_file, ext = ingestor.ingest(file=file)
-        redacted_result = redactor.redact(ingested_file, data_type=ext, language=language)
+        redacted_result = redactor.redact(ingested_file, data_type=ext, language=language, download=True)
         if ext == "img":
             buffer = save_img_to_buffer(redacted_result)
             return StreamingResponse(buffer, media_type="image/png")

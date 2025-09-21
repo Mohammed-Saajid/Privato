@@ -36,7 +36,8 @@ def analyze_file(
 
     try:
         ingested_file, ext = ingestor.ingest(file)
-        analysis_result = analyzer.analyze(ingested_file, data_type=ext, language=language)    
+        analysis_result = analyzer.analyze(ingested_file, data_type=ext, language=language)  
+        logger.info(f"File '{file.filename}' analyzed successfully.")  
         return AnalyzerResponse(analysis=analysis_result, message="Analysis completed successfully.")
     
     except Exception as e:

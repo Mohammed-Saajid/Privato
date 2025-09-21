@@ -2,9 +2,9 @@
 from fastapi import APIRouter
 from app.api.routes import redactor
 from app.api.routes import analyzer
-from logging import getLogger
+from core.config import logger
 
-logger = getLogger(__name__)
+
 
 logger.info("API routes module loaded successfully.")
 router = APIRouter(
