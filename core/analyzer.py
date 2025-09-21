@@ -2,7 +2,7 @@
 from pandas import DataFrame
 from core.image_analyzer_engine import CustomImageAnalyzerEngine as ImageAnalyzerEngine
 from PIL import Image
-from typing import List,Dict, Optional, Union
+from typing import Any, List,Dict, Optional, Tuple, Union
 from presidio_structured import  PandasAnalysisBuilder, JsonAnalysisBuilder
 from presidio_structured.config import StructuredAnalysis
 from core.analyzer_engine import CustomAnalyzerEngine as AnalyzerEngine
@@ -13,9 +13,9 @@ from dataclasses import asdict
 class Analyzer:
     """Analyzer class for text and image analysis."""
     def __init__(self):
-        """Initialize the Analyzer class.
-        Args:
-            log_decision_process (bool, optional): Whether to log the decision process. Defaults to False.
+        """
+        Initialize the Analyzer class.
+        Initializes the underlying analysis engines and sets up a handler map for different data types.
         """
         self.analyzer = AnalyzerEngine()
         self.image_analyzer = ImageAnalyzerEngine()
@@ -28,10 +28,10 @@ class Analyzer:
             "df": self.analyze_dataframe,
             "json": self.analyze_json
         }
-    def analyze(self, data: Union[str,Image.Image, DataFrame, Dict], data_type: str, language: str = "en", entities: list = None) -> Union[List[Dict], Dict]:
+    def analyze(self, data: Any, data_type: str, language: str = "en", entities: list = None) -> Union[List[Dict], Dict]:
         """Analyze the given data based on its type.
         Args:
-            data (Union[str, Image.Image, pd.DataFrame, dict]): The data to analyze.
+            data (Any): The data to analyze.
             data_type (str): The type of the data ('img', 'text', 'json', 'df').
             language (str, optional): The language of the content. Defaults to "en".
             entities (list, optional): List of entity types to look for. Defaults to None.
@@ -41,6 +41,18 @@ class Analyzer:
         if data_type not in self._handler_map:
             raise ValueError(f"Unsupported data type: {data_type}")
         return self._handler_map[data_type](data, language=language, entities=entities)
+    
+    def analyze_files(self, files: List[Tuple[Union[str,Image.Image, DataFrame, Dict],Any]], language: str = "en", entities: list = None) -> List[Union[List[Dict], Dict]]:
+        """Analyze a list of files based on their type.
+        Args:
+            files (List[Tuple[Union[str, Image.Image, pd.DataFrame, dict], Any]]): The list of files to analyze.
+            data_type (str): The type of the data ('img', 'text', 'json', 'df').
+            language (str, optional): The language of the content. Defaults to "en".
+            entities (list, optional): List of entity types to look for. Defaults to None.
+        Returns:
+            List[Union[List[Dict], Dict]]: The list of analysis results.
+        """
+        return [self.analyze(file, data_type=ext, language=language, entities=entities) for file, ext in files]
 
     def analyze_text(self, text: str, language: str = "en", entities: list = None) -> List[Dict]:
         """Analyze text for sensitive information.
