@@ -27,17 +27,6 @@ jobs:
         run: |
           make install-dev
 
-
-      - name: Build documentation
-        run: |
-          source .venv/bin/activate
-          mkdocs build
-
-      - name: Deploy documentation
-        run: |
-          source .venv/bin/activate
-          mkdocs gh-deploy --force
-
       - name: Build package
         run: |
           source .venv/bin/activate
