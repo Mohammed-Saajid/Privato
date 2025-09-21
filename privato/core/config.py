@@ -3,8 +3,6 @@ import logging
 import sys
 from privato.core.logging import InterceptHandler
 from loguru import logger
-from starlette.config import Config
-from starlette.datastructures import Secret
 
 API_PREFIX = "/api"
 VERSION = "0.1.2"
