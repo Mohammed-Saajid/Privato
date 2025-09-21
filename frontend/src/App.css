@@ -8,6 +8,9 @@
     background-color: var(--light);
     color: var(--dark);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .main_app .heading {
@@ -31,7 +34,7 @@
     width: 70%;
     margin: 0 auto 40px;
     border-radius: 10px;
-    height: 400px;
+    height: 50vh;
     position: relative;
 
     & input[type="file"] {
@@ -76,7 +79,7 @@
     scale: 0.95;
 }
 
-.main_app button:active{
+.main_app button:active {
     scale: 0.9;
 }
 
@@ -99,7 +102,7 @@
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     transition: all 0.2s ease;
-    min-width: 150px;   
+    min-width: 150px;
     position: relative;
     user-select: none;
 
@@ -140,7 +143,6 @@
         cursor: pointer;
         min-width: 120px;
         transition: border-color 0.2s ease;
-
 
         &:focus {
             outline: none;
