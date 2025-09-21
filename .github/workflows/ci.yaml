@@ -35,10 +35,12 @@ jobs:
 
       - name: Deploy documentation
         run: |
+          source .venv/bin/activate
           mkdocs gh-deploy --force
 
       - name: Build package
         run: |
+          source .venv/bin/activate
           python -m pip install --upgrade build
           python -m build
 
