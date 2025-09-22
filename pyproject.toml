@@ -1,11 +1,17 @@
 [project]
 requires-python = ">=3.9"
 name = "privato"
-version = "0.1.2"
+version = "0.1.3"
+readme = "README.md"
 description = "To Identify and Redact Personal Identifiable information"
 authors = [
     { name = "Mohammed Saajid", email = "mohammedsaajid23@gmail.com" },
 ]
+license = { text="MIT" }
+
+
+
+
 dependencies = [
     "fastapi>=0.103.0",
     "uvicorn",
@@ -32,6 +38,9 @@ dependencies = [
     "typer>=0.9.4",
    
 ]
+
+[project.urls]
+"Homepage" = "https://github.com/Mohammed-Saajid/privato"
 
 [project.optional-dependencies]
 dev = [

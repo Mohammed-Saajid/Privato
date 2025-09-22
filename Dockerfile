@@ -30,6 +30,11 @@ RUN pip install uv
 COPY pyproject.toml ./
 
 
+# Optional: create a pip cache directory
+RUN mkdir -p /root/.cache/pip
+ENV PIP_CACHE_DIR=/root/.cache/pip
+
+
 
 # Install production dependencies directly into the system Python
 RUN uv pip install --system .
@@ -75,15 +80,16 @@ RUN chown -R appuser:appuser /usr/local/bin
 
 
 # Copy the application and ML model files
-COPY --chown=appuser:appuser privato/app ./privato/app
-COPY --chown=appuser:appuser privato/ml ./privato/ml
+COPY --chown=appuser:appuser privato/app ./app
+COPY --chown=appuser:appuser privato/ml ./ml
 
 # Switch to the non-root user
 USER appuser
 
 # Set Python path so imports from /app work correctly
-ENV PYTHONPATH=/app:/app/app
+ENV PYTHONPATH=/app:/app/privato
+
 
 # Expose the port and define the command to run the application
 EXPOSE 8080
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "privato.app.main:app", "--host", "0.0.0.0", "--port", "8080"]
