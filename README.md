@@ -36,10 +36,15 @@ This will output:
 ```
 
 ## Web Interface
-To run the web interface, use the following command:
+To run the Backend, use the following command:
 
 ```bash
 uvicorn privato.app.main:app --reload
+```
+
+To deploy using Docker, use the following command:
+```bash
+make deploy
 ```
 
 To start the frontend, navigate to the `privato/static` directory and run:
@@ -51,5 +56,17 @@ npm run dev
 
 Then, open your browser and go to `http://localhost:5173`.
 
+
+## Make Commands
+- `make help`: List all available make commands.
+- `make install`: Install the required dependencies.
+- `make install-dev`: Install development dependencies.
+- `make test`: Run the test suite.
+- `make run`: Start the FastAPI Development server.
+- `make clean`: Remove temporary files and directories.
+- `make deploy`: Build and run the Docker container.
+- `make down`: Stop and remove the Docker container.
+
+
 ## Docs
-For more detailed documentation, visit the [Privato Documentation](https://github.com/Mohammed-Saajid/privato).
+For more detailed documentation, visit the [Privato Documentation](https://mohammed-saajid.github.io/Privato/).
