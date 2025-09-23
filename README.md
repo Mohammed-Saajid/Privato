@@ -39,22 +39,10 @@ This will output:
 To run the Backend, use the following command:
 
 ```bash
-uvicorn privato.app.main:app --reload
+privato api run
 ```
 
-To deploy using Docker, use the following command:
-```bash
-make deploy
-```
-
-To start the frontend, navigate to the `privato/static` directory and run:
-
-```bash
-npm install
-npm run dev
-```
-
-Then, open your browser and go to `http://localhost:5173`.
+Then, open your browser and go to `http://127.0.0.1:8080`.
 
 
 ## Make Commands

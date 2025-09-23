@@ -22,6 +22,14 @@ pip install privato
 ## Running the Application
 Once installed, you can start the Privato application using the command line interface (CLI). Open your terminal and run:
 
+
+```sh
+privato api run --port 8080
+```
+This command will start the Privato API server on port 8080. You can access the web interface by opening your web browser and navigating to `http://127.0.0.1:8080`.
+
+
+To see the available commands and options, you can run:
 ```sh
 
 privato --help

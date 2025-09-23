@@ -1,6 +1,6 @@
 """Main entry point for the Privato CLI."""
 from typer import Typer
-from privato.cli.commands import analyzer, redactor
+from privato.cli.commands import analyzer, redactor, api
 
 app = Typer(
     name="privato",
@@ -15,5 +15,6 @@ app = Typer(
 
 app.add_typer(analyzer.analyzer_app, name="analyzer", help="Analyze files and directories for private data.")
 app.add_typer(redactor.redactor_app, name="redactor", help="Redact files and directories to remove private data.")
+app.add_typer(api.app, name="api", help="Run Privato API.")
 if __name__ == "__main__":
     app()  

@@ -1,7 +1,7 @@
 [project]
 requires-python = ">=3.9"
 name = "privato"
-version = "0.1.3"
+version = "0.1.4"
 readme = "README.md"
 description = "To Identify and Redact Personal Identifiable information"
 authors = [
@@ -54,9 +54,6 @@ dev = [
     "mkdocs-material>=9.6.20",
     "mkdocstrings[python]>=0.30.1",
 ]
-aws = [
-    "mangum>=0.17.0"
-]
 
 [tool.black]
 line-length = 88
@@ -98,6 +95,8 @@ testpaths = [
 
 [tool.setuptools.package-data]
 "privato.ml.model" = ["*.onnx", "*.pt"]
+"privato.app" = ["static/dist/**"]
+
 
 [tool.setuptools]
 include-package-data = true
@@ -107,5 +106,6 @@ include-package-data = true
 # Set up CLI Commands
 [project.scripts]
 privato = "privato.cli.main:app"
+
 
 

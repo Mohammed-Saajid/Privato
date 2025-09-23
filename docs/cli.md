@@ -36,6 +36,18 @@ Privato's CLI is built using Typer, which allows for easy command definition and
     privato redactor redact input_path path/to/your/image.jpg output_path path/to/save/redacted_image.jpg --language en
   ```
 
+### 3. API Command
+- **Command**: `privato api run`
+- **Description**: Runs the API Interface With a minimal Frontend For Non Technical Persons
+
+- **Arguements**: 
+    - `port`: Port to run the API server on (default is 8080).
+- **Example**:
+  ```sh
+    privato api run --port 8080
+  ```
+
+
 ## Help Command
 To view the help message and see all available commands and options, you can run:
 ```sh
