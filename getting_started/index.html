@@ -579,16 +579,20 @@
 </code></pre></div>
 <h2 id="running-the-application">Running the Application</h2>
 <p>Once installed, you can start the Privato application using the command line interface (CLI). Open your terminal and run:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>privato<span class="w"> </span>--help
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>privato<span class="w"> </span>api<span class="w"> </span>run<span class="w"> </span>--port<span class="w"> </span><span class="m">8080</span>
 </code></pre></div>
+This command will start the Privato API server on port 8080. You can access the web interface by opening your web browser and navigating to <code>http://127.0.0.1:8080</code>.</p>
+<p>To see the available commands and options, you can run:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>privato<span class="w"> </span>--help
+</code></pre></div></p>
 <p>This command will display the available commands and options for using Privato.</p>
 <h2 id="analyzing-an-image">Analyzing an Image</h2>
 <p>To analyze an image for Personally Identifiable Information (PII), use the following command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>privato<span class="w"> </span>analyzer<span class="w"> </span>analyze<span class="w"> </span>--file<span class="w"> </span>path/to/your/image.jpg<span class="w"> </span>--language<span class="w"> </span>en
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>privato<span class="w"> </span>analyzer<span class="w"> </span>analyze<span class="w"> </span>--file<span class="w"> </span>path/to/your/image.jpg<span class="w"> </span>--language<span class="w"> </span>en
 </code></pre></div>
 <h2 id="redacting-an-image">Redacting an Image</h2>
 <p>To redact Personally Identifiable Information (PII) from an image, use the following command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>privato<span class="w"> </span>redactor<span class="w"> </span>redact<span class="w"> </span>--file<span class="w"> </span>path/to/your/image.jpg<span class="w"> </span>--language<span class="w"> </span>en<span class="w"> </span>--output<span class="w"> </span>path/to/save/redacted_image.jpg
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>privato<span class="w"> </span>redactor<span class="w"> </span>redact<span class="w"> </span>--file<span class="w"> </span>path/to/your/image.jpg<span class="w"> </span>--language<span class="w"> </span>en<span class="w"> </span>--output<span class="w"> </span>path/to/save/redacted_image.jpg
 </code></pre></div>
 
 
